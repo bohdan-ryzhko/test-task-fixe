@@ -1,25 +1,17 @@
-import { FC, useEffect } from "react";
-import { FlatList, StyleSheet, Text, View } from "react-native";
-import { useDispatch } from "react-redux";
+import { FC } from "react";
+import { FlatList, StyleSheet, View } from "react-native";
 
-import { AppDispatch } from "../types";
-import { getProductList } from "../redux/operations";
-import { useProductList } from "../hooks";
-import { Product } from "./Product";
+import { IProduct } from "../interfaces";
 
-export const ProductList: FC = () => {
+interface ProductListProps {
+  list: IProduct[];
+  product: FC<{ product: IProduct }>;
+}
 
-  const dispatch: AppDispatch = useDispatch();
-
-  const { list } = useProductList();
-
-  useEffect(() => {
-    dispatch(getProductList());
-  }, [dispatch]);
-
+export const ProductList: FC<ProductListProps> = ({ list, product: Product }) => {
   return (
     <>
-      <View>
+      <View style={styles.wrapperList}>
         <FlatList
           data={list}
           renderItem={({ item }) => <Product product={item} />}
@@ -33,6 +25,9 @@ export const ProductList: FC = () => {
 }
 
 const styles = StyleSheet.create({
+  wrapperList: {
+    flex: 1,
+  },
   productList: {
     justifyContent: "space-between",
   }
