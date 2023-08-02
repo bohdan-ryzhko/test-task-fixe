@@ -1,10 +1,12 @@
 import { FC } from "react";
-import { ActionSheetIOS, StyleSheet, Text } from "react-native";
+import { ActionSheetIOS, Platform, StyleSheet, Text } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { AppDispatch } from "../types";
 import { useDispatch } from "react-redux";
 import { clearBasket } from "../redux/basketSlice";
 import { useBasket } from "../hooks";
+
+import { useActionSheet } from '@expo/react-native-action-sheet';
 
 export const ClearBasket: FC = () => {
 
@@ -12,19 +14,37 @@ export const ClearBasket: FC = () => {
 
   const dispatch: AppDispatch = useDispatch();
 
+  const { showActionSheetWithOptions } = useActionSheet();
+
   const handleClearBasket = () => {
-    ActionSheetIOS.showActionSheetWithOptions(
-      {
-        options: ["To Trash", "Cancel"],
-        cancelButtonIndex: 1,
-      },
-      (buttonIndex) => {
-        if (buttonIndex === 0) {
-          dispatch(clearBasket());
-        }
-      }
-    );
-  }
+    const options = ["To Trash", "Cancel"];
+
+    switch (Platform.OS) {
+      case "ios":
+        ActionSheetIOS.showActionSheetWithOptions({
+            options,
+            cancelButtonIndex: 1,
+          },
+          (buttonIndex) => {
+            if (buttonIndex === 0) {
+              dispatch(clearBasket());
+            }
+          });
+        break;
+      case "android":
+        showActionSheetWithOptions({
+          options,
+          cancelButtonIndex: 1,
+        }, (buttonIndex) => {
+          switch (buttonIndex) {
+            case 0:
+              dispatch(clearBasket());
+              break;
+          }
+        });
+        break;
+    }
+  };
 
   return (
     <>

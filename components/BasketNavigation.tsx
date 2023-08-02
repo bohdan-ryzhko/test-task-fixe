@@ -5,7 +5,7 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 
 import { Ionicons } from '@expo/vector-icons';
 import { useBasket } from "../hooks";
-import { StyleSheet, Text, View } from "react-native";
+import { Platform, StyleSheet, Text, View } from "react-native";
 
 type RootStackParamList = {
   Main: undefined;
@@ -27,7 +27,11 @@ export const BasketNavigation: FC = () => {
         <Ionicons name="basket-outline" size={30} color="#fff" />
         {
           basket.list.length > 0 &&
-          <View style={styles.count}>
+          <View style={
+              Platform.OS === "ios"
+                ? styles.countIos
+                : styles.countAndroid
+            }>
               <Text style={styles.countText}>{basket.list.length}</Text>
           </View>
         }
@@ -40,7 +44,7 @@ const styles = StyleSheet.create({
   btn: {
     position: "relative",
   },
-  count: {
+  countIos: {
     position: "absolute",
     backgroundColor: "tomato",
     width: 15,
@@ -50,6 +54,17 @@ const styles = StyleSheet.create({
     alignItems: "center",
     right: -5,
     top: -5,
+  },
+  countAndroid: {
+    position: "absolute",
+    backgroundColor: "tomato",
+    width: 15,
+    height: 15,
+    borderRadius: 15,
+    justifyContent: "center",
+    alignItems: "center",
+    right: 0,
+    top: 0,
   },
   countText: {
     color: "#fff",

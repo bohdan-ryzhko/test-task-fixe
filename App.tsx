@@ -12,6 +12,8 @@ import { colors } from './constants';
 import { BasketNavigation } from './components/BasketNavigation';
 import { ClearBasket } from './components/ClearBasket';
 
+import { ActionSheetProvider } from '@expo/react-native-action-sheet';
+
 import Toast from 'react-native-toast-message';
 
 const MainStack = createStackNavigator();
@@ -30,6 +32,7 @@ export default function App() {
     <>
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
+          <ActionSheetProvider>
           <NavigationContainer>
             <MainStack.Navigator initialRouteName="Main">
               <MainStack.Screen
@@ -66,6 +69,7 @@ export default function App() {
               />
             </MainStack.Navigator>
           </NavigationContainer>
+          </ActionSheetProvider>
         </PersistGate>
       </Provider>
       <Toast />
