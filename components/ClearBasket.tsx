@@ -26,22 +26,27 @@ export const ClearBasket: FC = () => {
             cancelButtonIndex: 1,
           },
           (buttonIndex) => {
-            if (buttonIndex === 0) {
-              dispatch(clearBasket());
+            switch (buttonIndex) {
+              case 0:
+                dispatch(clearBasket());
+                break;
             }
-          });
+          }
+        );
         break;
       case "android":
         showActionSheetWithOptions({
           options,
           cancelButtonIndex: 1,
-        }, (buttonIndex) => {
-          switch (buttonIndex) {
-            case 0:
-              dispatch(clearBasket());
-              break;
+        },
+          (buttonIndex) => {
+            switch (buttonIndex) {
+              case 0:
+                dispatch(clearBasket());
+                break;
+            }
           }
-        });
+        );
         break;
     }
   };
