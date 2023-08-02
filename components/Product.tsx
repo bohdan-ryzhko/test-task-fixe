@@ -10,7 +10,7 @@ export const Product: FC<ProductProps> = ({ product }) => {
 
   const dispatch: AppDispatch = useDispatch();
 
-  const handleAddProduct = () => {
+  const onAddProduct = () => {
     dispatch(addProduct(product));
   }
 
@@ -21,7 +21,7 @@ export const Product: FC<ProductProps> = ({ product }) => {
         <Text style={styles.text}>Price: {product.price}</Text>
         <Text style={styles.text}>Description: {product.description}</Text>
         <TouchableOpacity
-          onPress={handleAddProduct}
+          onPress={onAddProduct}
           style={styles.addToBasket}
         >
           <Text style={[styles.text, styles.textBtn]}>Add to Basket</Text>

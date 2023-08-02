@@ -7,12 +7,21 @@ import { ProductBasket } from "../components/ProductBasket";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { colors } from "../constants";
 
+import Toast from 'react-native-toast-message';
+
 export const Basket: FC = () => {
 
   const { basket } = useBasket();
 
   const handleSendOrder = () => {
-    if (basket.list.length === 0) return;
+    if (basket.list.length === 0) {
+      Toast.show({
+        type: "error",
+        text1: "Choose one product",
+      });
+
+      return;
+    };
 
     console.log(basket);
   }

@@ -12,6 +12,8 @@ import { colors } from './constants';
 import { BasketNavigation } from './components/BasketNavigation';
 import { ClearBasket } from './components/ClearBasket';
 
+import Toast from 'react-native-toast-message';
+
 const MainStack = createStackNavigator();
 
 const titleStyle = {
@@ -66,6 +68,7 @@ export default function App() {
           </NavigationContainer>
         </PersistGate>
       </Provider>
+      <Toast />
     </>
   );
 }
