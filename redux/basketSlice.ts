@@ -27,9 +27,17 @@ const basketSlice = createSlice({
     clearBasket(state) {
       state.list = [];
       state.total = state.list.reduce(calcTotal, 0);
+    },
+    removeProduct(state, action) {
+      const removedIndex = state.list.findIndex(product => product.id === action.payload.id);
+
+      if (removedIndex === undefined) return;
+
+      state.list.splice(removedIndex, 1);
+      state.total = state.list.reduce(calcTotal, 0);
     }
   },
 });
 
-export const { addProduct, clearBasket } = basketSlice.actions;
+export const { addProduct, clearBasket, removeProduct } = basketSlice.actions;
 export const basketReducer = basketSlice.reducer;

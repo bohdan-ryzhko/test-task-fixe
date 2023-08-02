@@ -10,6 +10,7 @@ import { ApplicationRoot, Basket } from './screens';
 import { colors } from './constants';
 
 import { BasketNavigation } from './components/BasketNavigation';
+import { ClearBasket } from './components/ClearBasket';
 
 const MainStack = createStackNavigator();
 
@@ -50,6 +51,13 @@ export default function App() {
                   headerStyle,
                   headerTintColor: titleStyle.color,
                   headerTitleStyle: titleStyle,
+                  headerRightContainerStyle: {
+                    paddingRight: 20,
+                  },
+                  headerLeftContainerStyle: {
+                    paddingLeft: 15,
+                  },
+                  headerRight: () => <ClearBasket />
                 }}
                 name="Basket"
                 component={Basket}

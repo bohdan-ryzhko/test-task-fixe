@@ -3,7 +3,7 @@ import { StackNavigationProp } from "@react-navigation/stack";
 import { FC } from "react";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
-import Ionicons from '@expo/vector-icons/Ionicons';
+import { Ionicons } from '@expo/vector-icons';
 import { useBasket } from "../hooks";
 import { StyleSheet, Text, View } from "react-native";
 
